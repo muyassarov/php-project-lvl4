@@ -11,3 +11,19 @@ setup:
 	touch database/database.sqlite
 	php artisan migrate
 	npm install && npm run dev
+
+migrate:
+	php artisan migrate
+
+console:
+	php artisan tinker
+
+log:
+	tail -f storage/logs/laravel.log
+
+lint:
+	composer exec phpcs
+
+lint-fix:
+	composer exec phpcbf
+
