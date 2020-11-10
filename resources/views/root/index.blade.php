@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Home page')
 
 @section('content')
 <h1>List of tasks</h1>
