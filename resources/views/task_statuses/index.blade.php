@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'List of task statuses')
+@section('title', __('task_statuses.list-title'))
 
 @section('content')
     <div class="mb-5">
-        <a class="btn btn-primary" href="{{ route('task_statuses.create') }}">Add Task Status</a>
+        <a class="btn btn-primary" href="{{ route('task_statuses.create') }}">{{ __('task_statuses.add-btn') }}</a>
     </div>
     <section>
-        <h2>List of task statuses</h2>
+        <h2>{{ __('task_statuses.list-title') }}</h2>
         <table class="table">
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Created At</th>
-                <th>Actions</th>
+                <th>{{ __('task_statuses.h-title-id') }}</th>
+                <th>{{ __('task_statuses.h-title-name') }}</th>
+                <th>{{ __('task_statuses.h-title-created_at') }}</th>
+                <th>{{ __('task_statuses.h-title-actions') }}</th>
             </tr>
             @isset($taskStatuses)
                 @foreach($taskStatuses as $taskStatus)
@@ -22,11 +22,15 @@
                         <td>{{ $taskStatus->name }}</td>
                         <td>{{ $taskStatus->created_at }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('task_statuses.edit', $taskStatus->id) }}">Edit</a>
+                            <a class="btn btn-primary" href="{{ route('task_statuses.edit', $taskStatus->id) }}">
+                                {{ __('task_statuses.edit-btn') }}
+                            </a>
                             <form action="{{ route('task_statuses.destroy', $taskStatus->id) }}" method="post" class="d-inline">
                                 @method('delete')
                                 @csrf
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">
+                                    {{ __('task_statuses.delete-btn') }}
+                                </button>
                             </form>
                         </td>
                     </tr>

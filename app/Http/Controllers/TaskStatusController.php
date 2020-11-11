@@ -28,7 +28,7 @@ class TaskStatusController extends Controller
         $taskStatus->name = $request->post('name');
         $taskStatus->save();
 
-        flash('Task status successfully created')->success();
+        flash(__('task_statuses.create-success-msg'))->success();
         return redirect()->route('task_statuses.index');
     }
 
@@ -55,14 +55,14 @@ class TaskStatusController extends Controller
         $taskStatus->name = $request->get('name');
         $taskStatus->save();
 
-        flash('Task status successfully updated')->success();
+        flash(__('task_statuses.update-success-msg'))->success();
         return redirect()->route('task_statuses.edit', $taskStatus->id);
     }
 
     public function destroy(TaskStatus $taskStatus)
     {
         $taskStatus->delete();
-        flash('Task status successfully deleted')->success();
+        flash(__('task_statuses.destroy-success-msg'))->success();
         return redirect()->route('task_statuses.index');
     }
 }

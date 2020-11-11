@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('Statuses') }}</a>
+                    <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('task_statuses.top-nav-label') }}</a>
                 </li>
             </ul>
 
