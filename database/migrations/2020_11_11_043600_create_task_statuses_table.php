@@ -18,6 +18,11 @@ class CreateTaskStatusesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        app('db')->table('task_statuses')
+            ->insert([
+                'name' => 'New'
+            ]);
     }
 
     /**
