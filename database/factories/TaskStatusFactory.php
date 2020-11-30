@@ -22,7 +22,16 @@ class TaskStatusFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name
+            'name' => $this->faker->word()
         ];
+    }
+
+    public function newest()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'New'
+            ];
+        });
     }
 }

@@ -24,5 +24,5 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('task_statuses', TaskStatusController::class)
     ->middleware('auth');
-Route::resource('task', TaskController::class)
+Route::resource('tasks', TaskController::class)
     ->middleware('auth');

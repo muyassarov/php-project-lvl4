@@ -1,8 +1,13 @@
 <?php
 
 return [
-    'label-name' => 'Task',
-    'task-status-placeholder' => 'Status name',
+    'label-name' => 'Task name',
+    'task-name-placeholder' => 'Task name',
+    'label-description' => 'Description',
+    'task-description-placeholder' => 'Description',
+    'label-task-status' => 'Status',
+    'default-assigned-to' => 'Select user',
+    'label-assigned-to' => 'Assigned To',
     'back-btn' => 'Back',
     'edit-btn' => 'Edit',
     'delete-btn' => 'Delete',

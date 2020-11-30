@@ -13,7 +13,7 @@
                     <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('task_statuses.top-nav-label') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('task.index') }}">{{ __('task.top-nav-label') }}</a>
+                    <a class="nav-link" href="{{ route('tasks.index') }}">{{ __('tasks.top-nav-label') }}</a>
                 </li>
             </ul>
 
