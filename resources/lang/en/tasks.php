@@ -24,5 +24,6 @@ return [
     'top-nav-label' => 'Tasks',
     'create-success-msg' => 'Task successfully created',
     'update-success-msg' => 'Task successfully updated',
-    'destroy-success-msg' => 'Task successfully deleted'
+    'destroy-success-msg' => 'Task successfully deleted',
+    'destroy-permission-error-msg' => 'Permission denied, only task creator is able to delete the task'
 ];

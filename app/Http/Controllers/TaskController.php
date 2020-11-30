@@ -83,6 +83,10 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+        if ($task->created_by_id != Auth::id()) {
+            flash(__('tasks.destroy-permission-error-msg'))->error();
+            return redirect()->route('tasks.index');
+        }
         $task->delete();
         flash(__('tasks.destroy-success-msg'))->success();
         return redirect()->route('tasks.index');
