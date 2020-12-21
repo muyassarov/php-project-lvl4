@@ -73,6 +73,5 @@ class LabelController extends Controller
 
     public function destroy(Label $label)
     {
-
     }
 }
