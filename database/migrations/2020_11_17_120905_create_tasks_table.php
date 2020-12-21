@@ -22,7 +22,11 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->bigInteger('status_id')->default($defaultTaskStatus->id);
+            $table->foreignId('status_id')
+                ->default($defaultTaskStatus->id)
+                ->constrained('task_statuses')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->bigInteger('created_by_id');
             $table->bigInteger('assigned_to_id')->nullable();
             $table->timestamps();

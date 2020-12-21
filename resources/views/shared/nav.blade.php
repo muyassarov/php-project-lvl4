@@ -15,6 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('tasks.index') }}">{{ __('tasks.top-nav-label') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('labels.index') }}">{{ __('labels.top-nav-label') }}</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LabelController;
 use App\Http\Controllers\RootController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskController;
@@ -25,4 +26,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('task_statuses', TaskStatusController::class)
     ->middleware('auth');
 Route::resource('tasks', TaskController::class)
+    ->middleware('auth');
+Route::resource('labels', LabelController::class)
     ->middleware('auth');
