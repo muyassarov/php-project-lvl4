@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -21,10 +23,11 @@ class TaskController extends Controller
     {
         $taskStatuses = TaskStatus::all();
         $users        = User::all();
-        return view('tasks.create', compact('taskStatuses', 'users'));
+        $labels       = Label::all();
+        return view('tasks.create', compact('taskStatuses', 'users', 'labels'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validator = Validator::make($request->all(), [
             'name'           => 'required|min:4',
@@ -37,7 +40,8 @@ class TaskController extends Controller
             return redirect()->route('tasks.create')->withInput();
         }
 
-        $task = new Task([
+        $labels = $request->get('labels');
+        $task   = new Task([
             'name'           => $request->get('name'),
             'description'    => $request->get('description'),
             'status_id'      => $request->get('status_id'),
@@ -45,6 +49,10 @@ class TaskController extends Controller
             'created_by_id'  => Auth::id(),
         ]);
         $task->save();
+
+        if ($labels) {
+            $task->labels()->attach($labels);
+        }
 
         flash(__('tasks.create-success-msg'))->success();
         return redirect()->route('tasks.index');
@@ -54,10 +62,11 @@ class TaskController extends Controller
     {
         $taskStatuses = TaskStatus::all();
         $users        = User::all();
-        return view('tasks.edit', compact('task', 'taskStatuses', 'users'));
+        $labels       = Label::all();
+        return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels'));
     }
 
-    public function update(Request $request, Task $task)
+    public function update(Request $request, Task $task): RedirectResponse
     {
         $validator = Validator::make($request->all(), [
             'name'           => 'required|min:4',
@@ -69,12 +78,16 @@ class TaskController extends Controller
             return redirect()->route('tasks.edit', $task)->withInput();
         }
 
+        $labels = $request->get('labels');
         $task->fill([
             'name'           => $request->get('name'),
             'description'    => $request->get('description'),
             'status_id'      => $request->get('status_id'),
             'assigned_to_id' => $request->get('assigned_to_id'),
         ]);
+        if ($labels) {
+            $task->labels()->sync($labels);
+        }
         $task->save();
 
         flash(__('tasks.update-success-msg'))->success();

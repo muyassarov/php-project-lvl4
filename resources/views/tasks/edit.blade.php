@@ -35,6 +35,14 @@
                 @endforeach
             </select>
         </div>
+        <div class="form-group">
+            <label for="labels">{{ __('tasks.label-labels') }}</label>
+            <select name="labels[]" id="labels" class="form-control" multiple>
+                @foreach($labels as $label)
+                    <option value="{{ $label->id }}">{{ $label->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <a class="btn btn-lg btn-secondary" href="{{ route('tasks.index') }}">{{ __('tasks.back-btn') }}</a>
         <button class="btn btn-primary btn-lg" type="submit">{{ __('tasks.update-btn') }}</button>
     </form>

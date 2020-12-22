@@ -8,6 +8,8 @@ return [
     'label-task-status' => 'Status',
     'default-assigned-to' => 'Select user',
     'label-assigned-to' => 'Assigned To',
+    'label-labels' => 'Labels',
+    'default-labels' => 'Select label',
     'back-btn' => 'Back',
     'edit-btn' => 'Edit',
     'delete-btn' => 'Delete',
