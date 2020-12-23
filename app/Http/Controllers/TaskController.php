@@ -60,10 +60,13 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $taskStatuses = TaskStatus::all();
-        $users        = User::all();
-        $labels       = Label::all();
-        return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels'));
+        $taskStatuses  = TaskStatus::all();
+        $users         = User::all();
+        $labels        = Label::all();
+        $taskLabels    = $task->labels()->get();
+        $taskLabelsIds = $taskLabels->pluck('id')->toArray();
+
+        return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels', 'taskLabelsIds'));
     }
 
     public function update(Request $request, Task $task): RedirectResponse

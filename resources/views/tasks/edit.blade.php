@@ -39,7 +39,8 @@
             <label for="labels">{{ __('tasks.label-labels') }}</label>
             <select name="labels[]" id="labels" class="form-control" multiple>
                 @foreach($labels as $label)
-                    <option value="{{ $label->id }}">{{ $label->name }}</option>
+                    <option {{ in_array($label->id, $taskLabelsIds) ? 'selected' : '' }}
+                            value="{{ $label->id }}">{{ $label->name }}</option>
                 @endforeach
             </select>
         </div>
