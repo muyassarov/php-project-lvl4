@@ -8,6 +8,11 @@ use Illuminate\Validation\Rule;
 
 class TaskStatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index()
     {
         $taskStatuses = TaskStatus::orderBy('created_at', 'desc')->get();

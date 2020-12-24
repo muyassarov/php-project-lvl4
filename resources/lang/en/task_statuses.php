@@ -16,7 +16,7 @@ return [
     'h-title-name' => 'Name',
     'h-title-id' => 'ID',
     'h-title-created_at' => 'Created At',
-    'top-nav-label' => 'Statuses',
+    'top-nav-label' => 'Task Statuses',
     'create-success-msg' => 'Task status successfully created',
     'update-success-msg' => 'Task status successfully updated',
     'destroy-success-msg' => 'Task status successfully deleted'

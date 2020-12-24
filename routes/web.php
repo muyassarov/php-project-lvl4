@@ -23,9 +23,6 @@ Route::get('/', [RootController::class, 'index'])->name('root');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::resource('task_statuses', TaskStatusController::class)
-    ->middleware('auth');
-Route::resource('tasks', TaskController::class)
-    ->middleware('auth');
-Route::resource('labels', LabelController::class)
-    ->middleware('auth');
+Route::resource('task_statuses', TaskStatusController::class);
+Route::resource('tasks', TaskController::class);
+Route::resource('labels', LabelController::class);

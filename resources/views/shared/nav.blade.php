@@ -10,13 +10,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('task_statuses.top-nav-label') }}</a>
+                    <a class="nav-link {{ HtmlHelper::activeClass('tasks.index') }}"
+                       href="{{ route('tasks.index') }}">{{ __('tasks.top-nav-label') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('tasks.index') }}">{{ __('tasks.top-nav-label') }}</a>
+                    <a class="nav-link {{ HtmlHelper::activeClass('task_statuses.index') }}"
+                       href="{{ route('task_statuses.index') }}">{{ __('task_statuses.top-nav-label') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('labels.index') }}">{{ __('labels.top-nav-label') }}</a>
+                    <a class="nav-link {{ HtmlHelper::activeClass('labels.index') }}"
+                       href="{{ route('labels.index') }}">{{ __('labels.top-nav-label') }}</a>
                 </li>
             </ul>
 

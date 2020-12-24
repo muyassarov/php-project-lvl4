@@ -8,7 +8,6 @@ class RootController extends Controller
 {
     public function index()
     {
-        \Log::debug('Test debug message');
         return view('root.index');
     }
 }

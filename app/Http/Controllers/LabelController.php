@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Label;
-use App\Models\Task;
-use App\Models\TaskStatus;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class LabelController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index()
     {
         $labels = Label::orderBy('created_at', 'desc')->paginate(10);

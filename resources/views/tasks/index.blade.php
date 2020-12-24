@@ -3,17 +3,22 @@
 @section('title', __('tasks.list-title'))
 
 @section('content')
+    @auth
     <div class="mb-5">
         <a class="btn btn-primary" href="{{ route('tasks.create') }}">{{ __('tasks.add-btn') }}</a>
     </div>
+    @endauth
     <section>
+        @include('tasks.filters_form')
         <h2>{{ __('tasks.list-title') }}</h2>
         <table class="table">
             <tr>
                 <th>{{ __('tasks.h-title-id') }}</th>
                 <th>{{ __('tasks.h-title-name') }}</th>
                 <th>{{ __('tasks.h-title-created_at') }}</th>
+                @auth
                 <th>{{ __('tasks.h-title-actions') }}</th>
+                @endauth
             </tr>
             @isset($tasks)
                 @foreach($tasks as $task)
@@ -21,6 +26,7 @@
                         <td>{{ $task->id }}</td>
                         <td>{{ $task->name }}</td>
                         <td>{{ $task->created_at }}</td>
+                        @auth
                         <td>
                             <a class="btn btn-primary" href="{{ route('tasks.edit', $task) }}">
                                 {{ __('tasks.edit-btn') }}
@@ -33,6 +39,7 @@
                                 </button>
                             </form>
                         </td>
+                        @endauth
                     </tr>
                 @endforeach
             @endisset

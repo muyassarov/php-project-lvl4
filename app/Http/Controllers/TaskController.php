@@ -13,10 +13,17 @@ use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index()
     {
+        $taskStatuses = TaskStatus::all();
+        $users        = User::all();
         $tasks = Task::orderBy('created_at', 'desc')->paginate(10);
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.index', compact('tasks', 'taskStatuses', 'users'));
     }
 
     public function create()
