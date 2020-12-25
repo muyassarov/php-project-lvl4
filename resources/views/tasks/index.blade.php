@@ -14,7 +14,10 @@
         <table class="table">
             <tr>
                 <th>{{ __('tasks.h-title-id') }}</th>
+                <th>{{ __('tasks.h-title-status') }}</th>
                 <th>{{ __('tasks.h-title-name') }}</th>
+                <th>{{ __('tasks.h-title-creator') }}</th>
+                <th>{{ __('tasks.h-title-assignee') }}</th>
                 <th>{{ __('tasks.h-title-created_at') }}</th>
                 @auth
                 <th>{{ __('tasks.h-title-actions') }}</th>
@@ -24,7 +27,12 @@
                 @foreach($tasks as $task)
                     <tr>
                         <td>{{ $task->id }}</td>
-                        <td>{{ $task->name }}</td>
+                        <td>{{ $task->status->name }}</td>
+                        <td>
+                            <a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a>
+                        </td>
+                        <td>{{ $task->creator->name }}</td>
+                        <td>{{ $task->assignee->name }}</td>
                         <td>{{ $task->created_at }}</td>
                         @auth
                         <td>

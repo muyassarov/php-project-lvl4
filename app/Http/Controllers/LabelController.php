@@ -72,7 +72,7 @@ class LabelController extends Controller
         return redirect()->route('labels.edit', $label);
     }
 
-    public function destroy(Label $label)
+    public function destroy(Label $label): RedirectResponse
     {
         $label->delete();
         flash(__('labels.destroy-success-msg'))->success();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -24,7 +25,7 @@ class TaskStatusController extends Controller
         return view('task_statuses.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
             'name' => 'required|min:2|unique:App\Models\TaskStatus,name',
@@ -47,7 +48,7 @@ class TaskStatusController extends Controller
         return view('task_statuses.edit', compact('taskStatus'));
     }
 
-    public function update(Request $request, TaskStatus $taskStatus)
+    public function update(Request $request, TaskStatus $taskStatus): RedirectResponse
     {
         $this->validate($request, [
             'name' => [
@@ -64,7 +65,7 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.edit', $taskStatus->id);
     }
 
-    public function destroy(TaskStatus $taskStatus)
+    public function destroy(TaskStatus $taskStatus): RedirectResponse
     {
         $taskStatus->delete();
         flash(__('task_statuses.destroy-success-msg'))->success();

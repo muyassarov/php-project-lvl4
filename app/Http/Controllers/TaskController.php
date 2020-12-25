@@ -10,19 +10,30 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Spatie\QueryBuilder\QueryBuilder;
+use Symfony\Component\Console\Input\Input;
 
 class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $tasks = QueryBuilder::for(Task::class)->allowedFilters([
+                'status_id',
+                'assigned_to_id',
+                'created_by_id',
+            ])->allowedIncludes([
+                'status',
+                'creator',
+                'assignee',
+            ])->orderBy('created_at', 'desc')->get();
+
         $taskStatuses = TaskStatus::all();
         $users        = User::all();
-        $tasks = Task::orderBy('created_at', 'desc')->paginate(10);
         return view('tasks.index', compact('tasks', 'taskStatuses', 'users'));
     }
 
@@ -65,6 +76,11 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
+    public function show(Task $task)
+    {
+        return view('tasks.show', compact('task'));
+    }
+
     public function edit(Task $task)
     {
         $taskStatuses  = TaskStatus::all();
@@ -104,7 +120,7 @@ class TaskController extends Controller
         return redirect()->route('tasks.edit', $task);
     }
 
-    public function destroy(Task $task)
+    public function destroy(Task $task): RedirectResponse
     {
         if ($task->created_by_id != Auth::id()) {
             flash(__('tasks.destroy-permission-error-msg'))->error();
