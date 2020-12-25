@@ -5,7 +5,6 @@ $creator = $filter['created_by_id'] ?? '';
 $assignee = $filter['assigned_to_id'] ?? '';
 ?>
 <form action="{{ route('tasks.index') }}" method="get" class="row mb-4">
-    @csrf
     <div class="col-2">
         <label for="filterTaskStatus" class="sr-only"></label>
         <select class="form-control" name="filter[status_id]" id="filterTaskStatus">
