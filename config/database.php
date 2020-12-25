@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Str;
+$databaseUrl = parse_url(getenv("DATABASE_URL"));
+$pgDbHost = $databaseUrl['host'] ?? '127.0.0.1';
+$pgDbPort = $databaseUrl['port'] ?? 5432;
+$pgDbName = $databaseUrl['path'] ?? 'forge';
+$pgDbUser = $databaseUrl['user'] ?? 'forge';
+$pgDbPass = $databaseUrl['pass'] ?? '';
 
 return [
 
@@ -15,7 +21,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,11 +72,11 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', $pgDbHost),
+            'port' => env('DB_PORT', $pgDbPort),
+            'database' => env('DB_DATABASE', $pgDbName),
+            'username' => env('DB_USERNAME', $pgDbUser),
+            'password' => env('DB_PASSWORD', $pgDbPass),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
