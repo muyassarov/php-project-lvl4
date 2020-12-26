@@ -10,8 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
-use Symfony\Component\Console\Input\Input;
 
 class TaskController extends Controller
 {
@@ -20,12 +20,12 @@ class TaskController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $tasks = QueryBuilder::for(Task::class)->allowedFilters([
-                'status_id',
-                'assigned_to_id',
-                'created_by_id',
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('assigned_to_id'),
+                AllowedFilter::exact('created_by_id'),
             ])->allowedIncludes([
                 'status',
                 'creator',
