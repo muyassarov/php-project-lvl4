@@ -32,7 +32,7 @@
                             <a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a>
                         </td>
                         <td>{{ $task->creator->name }}</td>
-                        <td>{{ $task->assignee->name }}</td>
+                        <td>{!! $task->assignee ? $task->assignee->name : '&mdash;' !!}</td>
                         <td>{{ $task->created_at }}</td>
                         @auth
                         <td>
