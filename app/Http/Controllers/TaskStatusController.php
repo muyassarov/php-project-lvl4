@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\{RedirectResponse, Request};
 use Illuminate\Validation\Rule;
 
 class TaskStatusController extends Controller

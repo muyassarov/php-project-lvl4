@@ -6,11 +6,9 @@ test:
 
 setup:
 	composer install
-	cp -n .env.example .env|| true
-	php artisan key:gen --ansi
-	touch database/database.sqlite
-	php artisan migrate
-	npm install && npm run dev
+	make setup-env
+	make setup-db
+	make setup-assets
 
 migrate:
 	php artisan migrate
@@ -26,4 +24,15 @@ lint:
 
 lint-fix:
 	composer exec phpcbf
+
+setup-env:
+	cp -n .env.example .env|| true
+	php artisan key:gen --ansi
+
+setup-db:
+	touch database/database.sqlite
+	php artisan migrate
+
+setup-assets:
+	npm install && npm run dev
 

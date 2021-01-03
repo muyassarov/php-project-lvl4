@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Task;
-use App\Models\TaskStatus;
-use App\Models\User;
+use App\Models\{Task, TaskStatus, User};
 use Tests\TestCase;
 
 class TaskTest extends TestCase

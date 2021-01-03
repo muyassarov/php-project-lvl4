@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Label;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\{RedirectResponse, Request};
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 

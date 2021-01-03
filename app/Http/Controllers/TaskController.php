@@ -2,22 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Label;
-use App\Models\Task;
-use App\Models\TaskStatus;
-use App\Models\User;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Spatie\QueryBuilder\AllowedFilter;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Models\{Label, Task, TaskStatus, User};
+use Illuminate\Http\{RedirectResponse, Request};
+use Illuminate\Support\Facades\{Auth, Validator};
+use Spatie\QueryBuilder\{AllowedFilter, QueryBuilder};
 
 class TaskController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        //$this->authorizeResource(Task::class, 'task);
     }
 
     public function index()
