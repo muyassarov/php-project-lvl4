@@ -27,16 +27,17 @@ class TaskController extends Controller
                 'assignee',
             ])->orderBy('created_at', 'desc')->get();
 
-        $taskStatuses = TaskStatus::all();
-        $users        = User::all();
+        $taskStatuses = TaskStatus::all()->pluck('name', 'id');
+        $users        = User::all()->pluck('name', 'id');
+
         return view('tasks.index', compact('tasks', 'taskStatuses', 'users'));
     }
 
     public function create()
     {
-        $taskStatuses = TaskStatus::all();
-        $users        = User::all();
-        $labels       = Label::all();
+        $taskStatuses = TaskStatus::all()->pluck('name', 'id');
+        $users        = User::all()->pluck('name', 'id');
+        $labels       = Label::all()->pluck('name', 'id');
         return view('tasks.create', compact('taskStatuses', 'users', 'labels'));
     }
 
