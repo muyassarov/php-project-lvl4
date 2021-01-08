@@ -11,21 +11,24 @@ class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except([
+            'index',
+            'show',
+        ]);
         //$this->authorizeResource(Task::class, 'task);
     }
 
     public function index()
     {
         $tasks = QueryBuilder::for(Task::class)->allowedFilters([
-                AllowedFilter::exact('status_id'),
-                AllowedFilter::exact('assigned_to_id'),
-                AllowedFilter::exact('created_by_id'),
-            ])->allowedIncludes([
-                'status',
-                'creator',
-                'assignee',
-            ])->orderBy('created_at', 'desc')->get();
+            AllowedFilter::exact('status_id'),
+            AllowedFilter::exact('assigned_to_id'),
+            AllowedFilter::exact('created_by_id'),
+        ])->allowedIncludes([
+            'status',
+            'creator',
+            'assignee',
+        ])->orderBy('created_at', 'desc')->get();
 
         $taskStatuses = TaskStatus::all()->pluck('name', 'id');
         $users        = User::all()->pluck('name', 'id');
@@ -79,11 +82,10 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $taskStatuses  = TaskStatus::all();
-        $users         = User::all();
-        $labels        = Label::all();
-        $taskLabels    = $task->labels()->get();
-        $taskLabelsIds = $taskLabels->pluck('id')->toArray();
+        $taskStatuses  = TaskStatus::all()->pluck('name', 'id');
+        $users         = User::all()->pluck('name', 'id');
+        $labels        = Label::all()->pluck('name', 'id');
+        $taskLabelsIds = $task->labels()->get()->pluck('id')->toArray();
 
         return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels', 'taskLabelsIds'));
     }

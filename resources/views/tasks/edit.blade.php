@@ -4,47 +4,28 @@
 
 @section('content')
     <h2>{{ __('tasks.update-title') }}</h2>
-    <form method="post" action="{{ route('tasks.update', $task) }}">
-        @method('put')
-        @csrf
-        <div class="form-group">
-            <label for="name">{{ __('tasks.label-name') }}</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('tasks.task-name-placeholder') }}"
-                   value="{{ $task->name }}" required autofocus>
-        </div>
-        <div class="form-group">
-            <label for="description">{{ __('tasks.label-description') }}</label>
-            <textarea id="description" name="description" class="form-control"
-                      placeholder="{{ __('tasks.task-description-placeholder') }}">{{ $task->description }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="status_id">{{ __('tasks.label-task-status') }}</label>
-            <select name="status_id" id="status_id" class="form-control" required>
-                @foreach($taskStatuses as $taskStatus)
-                <option {{$taskStatus->id == $task->status_id ? 'selected' : ''}}
-                        value="{{ $taskStatus->id }}">{{ $taskStatus->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="assigned_to_id">{{ __('tasks.label-assigned-to') }}</label>
-            <select name="assigned_to_id" id="assigned_to_id" class="form-control">
-                <option value="">{{ __('tasks.default-assigned-to') }}</option>
-                @foreach($users as $user)
-                <option value="{{ $user->id }}" {{ $user->id == $task->assigned_to_id ? 'selected' : '' }}>{{ $user->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="labels">{{ __('tasks.label-labels') }}</label>
-            <select name="labels[]" id="labels" class="form-control" multiple>
-                @foreach($labels as $label)
-                    <option {{ in_array($label->id, $taskLabelsIds) ? 'selected' : '' }}
-                            value="{{ $label->id }}">{{ $label->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <a class="btn btn-lg btn-secondary" href="{{ route('tasks.index') }}">{{ __('tasks.back-btn') }}</a>
-        <button class="btn btn-primary btn-lg" type="submit">{{ __('tasks.update-btn') }}</button>
-    </form>
+    {!! Form::model($task, ['route' => ['tasks.update', $task], 'method' => 'put']) !!}
+    <div class="form-group">
+        {!! Form::label('name', __('tasks.label-name')) !!}
+        {!! Form::text('name', $task->name, ['class' => 'form-control', 'placeholder' => __('tasks.task-name-placeholder'), 'required', 'autofocus']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('description', __('tasks.label-description')) !!}
+        {!! Form::textarea('description', $task->description, ['class' => 'form-control', 'placeholder' => __('tasks.task-description-placeholder'), 'rows' => 2]) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('status_id', __('tasks.label-task-status')) !!}
+        {!! Form::select('status_id', $taskStatuses, $task->status_id, ['class' => 'form-control', 'required']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('assignee_to_id', __('tasks.label-assigned-to')) !!}
+        {!! Form::select('assigned_to_id', $users, $task->assigned_to_id, ['class' => 'form-control', 'placeholder' => __('tasks.default-assigned-to')]) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('labels', __('tasks.label-labels')) !!}
+        {!! Form::select('labels[]', $labels, $taskLabelsIds, ['class' => 'form-control', 'multiple']) !!}
+    </div>
+    {!! link_to_route('tasks.index', __('tasks.back-btn'), [], ['class' => 'btn btn-lg btn-secondary']) !!}
+    {!! Form::submit(__('tasks.update-btn'), ['class' => 'btn btn-primary btn-lg']) !!}
+    {!! Form::close() !!}
 @endsection

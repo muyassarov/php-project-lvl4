@@ -48,10 +48,8 @@
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                            {!! Form::open(['route' => 'logout', 'id' => 'logout-form', 'class' => 'd-none']) !!}
+                            {!! Form::close() !!}
                         </div>
                     </li>
                 @endguest

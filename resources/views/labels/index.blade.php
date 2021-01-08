@@ -4,9 +4,9 @@
 
 @section('content')
     @auth
-    <div class="mb-5">
-        <a class="btn btn-primary" href="{{ route('labels.create') }}">{{ __('labels.add-btn') }}</a>
-    </div>
+        <div class="mb-5">
+            <a class="btn btn-primary" href="{{ route('labels.create') }}">{{ __('labels.add-btn') }}</a>
+        </div>
     @endauth
     <section>
         <h2>{{ __('labels.list-title') }}</h2>
@@ -26,18 +26,14 @@
                         <td>{{ $label->name }}</td>
                         <td>{{ $label->created_at }}</td>
                         @auth
-                        <td>
-                            <a class="btn btn-primary" href="{{ route('labels.edit', $label) }}">
-                                {{ __('labels.edit-btn') }}
-                            </a>
-                            <form action="{{ route('labels.destroy', $label->id) }}" method="post" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" class="btn btn-danger">
-                                    {{ __('labels.delete-btn') }}
-                                </button>
-                            </form>
-                        </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ route('labels.edit', $label) }}">
+                                    {{ __('labels.edit-btn') }}
+                                </a>
+                                {!! Form::open(['route' => ['labels.destroy', $label->id], 'method' => 'delete', 'class' => 'd-inline']) !!}
+                                {!! Form::submit(__('labels.delete-btn'), ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
+                            </td>
                         @endauth
                     </tr>
                 @endforeach
