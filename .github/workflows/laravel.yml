@@ -13,8 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Directory Permissions
-      run: chmod -R 777 storage bootstrap/cache
 
     - name: Setup
       run: make setup
@@ -24,4 +22,3 @@ jobs:
 
     - name: Run linter
       run: make lint
-

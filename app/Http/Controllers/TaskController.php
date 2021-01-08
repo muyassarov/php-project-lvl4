@@ -2,46 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Label;
-use App\Models\Task;
-use App\Models\TaskStatus;
-use App\Models\User;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Spatie\QueryBuilder\AllowedFilter;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Models\{Label, Task, TaskStatus, User};
+use Illuminate\Http\{RedirectResponse, Request};
+use Illuminate\Support\Facades\{Auth, Gate, Validator};
+use Spatie\QueryBuilder\{AllowedFilter, QueryBuilder};
 
 class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except([
+            'index',
+            'show',
+        ]);
+        //$this->authorizeResource(Task::class);
     }
 
     public function index()
     {
         $tasks = QueryBuilder::for(Task::class)->allowedFilters([
-                AllowedFilter::exact('status_id'),
-                AllowedFilter::exact('assigned_to_id'),
-                AllowedFilter::exact('created_by_id'),
-            ])->allowedIncludes([
-                'status',
-                'creator',
-                'assignee',
-            ])->orderBy('created_at', 'desc')->get();
+            AllowedFilter::exact('status_id'),
+            AllowedFilter::exact('assigned_to_id'),
+            AllowedFilter::exact('created_by_id'),
+        ])->allowedIncludes([
+            'status',
+            'creator',
+            'assignee',
+        ])->orderBy('created_at', 'desc')->get();
 
-        $taskStatuses = TaskStatus::all();
-        $users        = User::all();
+        $taskStatuses = TaskStatus::all()->pluck('name', 'id');
+        $users        = User::all()->pluck('name', 'id');
+
         return view('tasks.index', compact('tasks', 'taskStatuses', 'users'));
     }
 
     public function create()
     {
-        $taskStatuses = TaskStatus::all();
-        $users        = User::all();
-        $labels       = Label::all();
+        $taskStatuses = TaskStatus::all()->pluck('name', 'id');
+        $users        = User::all()->pluck('name', 'id');
+        $labels       = Label::all()->pluck('name', 'id');
         return view('tasks.create', compact('taskStatuses', 'users', 'labels'));
     }
 
@@ -83,11 +82,10 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $taskStatuses  = TaskStatus::all();
-        $users         = User::all();
-        $labels        = Label::all();
-        $taskLabels    = $task->labels()->get();
-        $taskLabelsIds = $taskLabels->pluck('id')->toArray();
+        $taskStatuses  = TaskStatus::all()->pluck('name', 'id');
+        $users         = User::all()->pluck('name', 'id');
+        $labels        = Label::all()->pluck('name', 'id');
+        $taskLabelsIds = $task->labels()->get()->pluck('id')->toArray();
 
         return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels', 'taskLabelsIds'));
     }

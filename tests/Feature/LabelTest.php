@@ -2,8 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Label;
-use App\Models\User;
+use App\Models\{Label, User};
 use Tests\TestCase;
 
 class LabelTest extends TestCase

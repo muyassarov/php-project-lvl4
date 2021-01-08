@@ -2,10 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\TaskStatus;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\{TaskStatus, User};
 use Tests\TestCase;
 
 class TaskStatusTest extends TestCase

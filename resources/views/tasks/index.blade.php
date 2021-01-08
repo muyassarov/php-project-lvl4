@@ -32,20 +32,16 @@
                             <a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a>
                         </td>
                         <td>{{ $task->creator->name }}</td>
-                        <td>{!! $task->assignee ? $task->assignee->name : '&mdash;' !!}</td>
+                        <td>{!! $task->assignee->name ?? '&mdash;' !!}</td>
                         <td>{{ $task->created_at }}</td>
                         @auth
                         <td>
                             <a class="btn btn-primary" href="{{ route('tasks.edit', $task) }}">
                                 {{ __('tasks.edit-btn') }}
                             </a>
-                            <form action="{{ route('tasks.destroy', $task->id) }}" method="post" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" class="btn btn-danger">
-                                    {{ __('tasks.delete-btn') }}
-                                </button>
-                            </form>
+                            {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete', 'class' => 'd-inline']) !!}
+                            {!! Form::submit(__('tasks.delete-btn'), ['class' => 'btn btn-danger']) !!}
+                            {!! Form::close() !!}
                         </td>
                         @endauth
                     </tr>
