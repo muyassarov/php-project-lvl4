@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\{Label, Task, TaskStatus, User};
 use Illuminate\Http\{RedirectResponse, Request};
-use Illuminate\Support\Facades\{Auth, Validator};
+use Illuminate\Support\Facades\{Auth, Gate, Validator};
 use Spatie\QueryBuilder\{AllowedFilter, QueryBuilder};
 
 class TaskController extends Controller
@@ -15,7 +15,7 @@ class TaskController extends Controller
             'index',
             'show',
         ]);
-        //$this->authorizeResource(Task::class, 'task);
+        //$this->authorizeResource(Task::class);
     }
 
     public function index()
