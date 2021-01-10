@@ -66,5 +66,4 @@ class LabelPolicy
     {
         return (bool)$user;
     }
-
 }

@@ -66,5 +66,4 @@ class TaskStatusPolicy
     {
         return (bool)$user;
     }
-
 }

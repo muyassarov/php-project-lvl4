@@ -66,5 +66,4 @@ class TaskPolicy
     {
         return $task->creator->is($user);
     }
-
 }
