@@ -21,7 +21,7 @@ class TaskFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name'           => $this->faker->sentence,
@@ -30,5 +30,14 @@ class TaskFactory extends Factory
             'created_by_id'  => User::factory(),
             'assigned_to_id' => User::factory(),
         ];
+    }
+
+    public function createdBy(User $user): TaskFactory
+    {
+        return $this->state(function (array $attributes) use ($user) {
+            return [
+                'created_by_id' => $user->id,
+            ];
+        });
     }
 }

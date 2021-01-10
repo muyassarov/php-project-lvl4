@@ -4,6 +4,12 @@ start:
 test:
 	php artisan test
 
+run-test-method:
+	composer exec -v phpunit -- --colors=always --filter $(M) $(F)
+
+run-test-file:
+	composer exec -v phpunit -- --colors=always $(F)
+
 setup:
 	composer install
 	make setup-env

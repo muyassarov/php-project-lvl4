@@ -19,21 +19,34 @@ class LabelTest extends TestCase
         $this->label->save();
     }
 
-    public function testIndexAction()
+    public function testIndexActionAsUser()
     {
         $response = $this->actingAs($this->user)->get(route('labels.index'));
-        $response->assertSee($this->label->name);
         $response->assertStatus(200);
+        $response->assertSee($this->label->name);
     }
 
-    public function testCreateAction()
+    public function testIndexActionAsGuest()
+    {
+        $response = $this->get(route('labels.index'));
+        $response->assertStatus(200);
+        $response->assertSee($this->label->name);
+    }
+
+    public function testCreateActionAsUser()
     {
         $response = $this->actingAs($this->user)->get(route('labels.create'));
         $response->assertViewIs('labels.create');
         $response->assertStatus(200);
     }
 
-    public function testStore()
+    public function testCreateActionAsGuest()
+    {
+        $response = $this->get(route('labels.create'));
+        $response->assertStatus(403);
+    }
+
+    public function testStoreAsUser()
     {
         $data     = [
             'name' => 'test.label',
@@ -44,29 +57,56 @@ class LabelTest extends TestCase
         $this->assertDatabaseHas('labels', $data);
     }
 
-    public function testEditAction()
+    public function testStoreAsGuest()
     {
-        $response = $this->actingAs($this->user)->get(route('labels.edit', $this->label->id));
+        $response = $this->post(route('labels.store'), [
+            'name' => 'private',
+        ]);
+        $response->assertStatus(403);
+    }
+
+    public function testEditActionAsUser()
+    {
+        $response = $this->actingAs($this->user)->get(route('labels.edit', $this->label));
         $response->assertViewIs('labels.edit');
         $response->assertStatus(200);
     }
 
-    public function testUpdate()
+    public function testEditActionAsGuest()
+    {
+        $response = $this->get(route('labels.edit', $this->label));
+        $response->assertStatus(403);
+    }
+
+    public function testUpdateAsUser()
     {
         $data     = [
             'name' => 'updated',
         ];
-        $response = $this->actingAs($this->user)->put(route('labels.update', $this->label->id), $data);
+        $response = $this->actingAs($this->user)->put(route('labels.update', $this->label), $data);
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('labels', $data);
     }
 
-    public function testDestroy()
+    public function testUpdateAsGuest()
     {
-        $response = $this->actingAs($this->user)->delete(route('labels.destroy', $this->label->id));
+        $response = $this->put(route('labels.update', $this->label), [
+            'name' => 'updated',
+        ]);
+        $response->assertStatus(403);
+    }
+
+    public function testDestroyAsUser()
+    {
+        $response = $this->actingAs($this->user)->delete(route('labels.destroy', $this->label));
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect();
-        $response->assertDontSee($this->label->name);
+    }
+
+    public function testDestroyAsGuest()
+    {
+        $response = $this->delete(route('labels.destroy', $this->label));
+        $response->assertStatus(403);
     }
 }

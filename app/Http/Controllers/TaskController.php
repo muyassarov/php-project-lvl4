@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\{Label, Task, TaskStatus, User};
 use Illuminate\Http\{RedirectResponse, Request};
-use Illuminate\Support\Facades\{Auth, Gate, Validator};
+use Illuminate\Support\Facades\{Auth, Validator};
 use Spatie\QueryBuilder\{AllowedFilter, QueryBuilder};
 
 class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except([
-            'index',
-            'show',
-        ]);
-        //$this->authorizeResource(Task::class);
+        $this->authorizeResource(Task::class);
     }
 
     public function index()
@@ -120,10 +116,6 @@ class TaskController extends Controller
 
     public function destroy(Task $task): RedirectResponse
     {
-        if ($task->created_by_id != Auth::id()) {
-            flash(__('tasks.destroy-permission-error-msg'))->error();
-            return redirect()->route('tasks.index');
-        }
         $task->delete();
         flash(__('tasks.destroy-success-msg'))->success();
         return redirect()->route('tasks.index');

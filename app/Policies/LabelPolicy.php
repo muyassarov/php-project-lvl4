@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\{Task, User};
+use App\Models\{Label, User};
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TaskPolicy
+class LabelPolicy
 {
     use HandlesAuthorization;
 
@@ -24,10 +24,10 @@ class TaskPolicy
      * Determine whether the user can view the model.
      *
      * @param  ?User  $user
-     * @param  Task  $task
+     * @param  Label  $label
      * @return mixed
      */
-    public function view(?User $user, Task $task): bool
+    public function view(?User $user, Label $label): bool
     {
         return true;
     }
@@ -47,10 +47,10 @@ class TaskPolicy
      * Determine whether the user can update the model.
      *
      * @param  User  $user
-     * @param  Task  $task
+     * @param  Label  $label
      * @return mixed
      */
-    public function update(User $user, Task $task): bool
+    public function update(User $user, Label $label): bool
     {
         return (bool)$user;
     }
@@ -58,13 +58,13 @@ class TaskPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
+     * @param  User  $user
+     * @param  Label  $label
      * @return mixed
      */
-    public function delete(User $user, Task $task): bool
+    public function delete(User $user, Label $label): bool
     {
-        return $task->creator->is($user);
+        return (bool)$user;
     }
 
 }
