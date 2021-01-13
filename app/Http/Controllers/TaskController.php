@@ -67,7 +67,7 @@ class TaskController extends Controller
             $task->labels()->attach($labels);
         }
 
-        flash(__('tasks.create-success-msg'))->success();
+        flash(__('flash.task.store.success'))->success();
         return redirect()->route('tasks.index');
     }
 
@@ -81,9 +81,8 @@ class TaskController extends Controller
         $taskStatuses  = TaskStatus::all()->pluck('name', 'id');
         $users         = User::all()->pluck('name', 'id');
         $labels        = Label::all()->pluck('name', 'id');
-        $taskLabelsIds = $task->labels()->get()->pluck('id')->toArray();
 
-        return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels', 'taskLabelsIds'));
+        return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels'));
     }
 
     public function update(Request $request, Task $task): RedirectResponse
@@ -105,19 +104,17 @@ class TaskController extends Controller
             'status_id'      => $request->get('status_id'),
             'assigned_to_id' => $request->get('assigned_to_id'),
         ]);
-        if ($labels) {
-            $task->labels()->sync($labels);
-        }
+        $task->labels()->sync($labels);
         $task->save();
 
-        flash(__('tasks.update-success-msg'))->success();
-        return redirect()->route('tasks.edit', $task);
+        flash(__('flash.task.update.success'))->success();
+        return redirect()->route('tasks.index');
     }
 
     public function destroy(Task $task): RedirectResponse
     {
         $task->delete();
-        flash(__('tasks.destroy-success-msg'))->success();
+        flash(__('flash.task.destroy.success'))->success();
         return redirect()->route('tasks.index');
     }
 }

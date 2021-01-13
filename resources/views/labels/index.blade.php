@@ -30,9 +30,9 @@
                                 <a class="btn btn-primary" href="{{ route('labels.edit', $label) }}">
                                     {{ __('labels.edit-btn') }}
                                 </a>
-                                {!! Form::open(['route' => ['labels.destroy', $label->id], 'method' => 'delete', 'class' => 'd-inline']) !!}
-                                {!! Form::submit(__('labels.delete-btn'), ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
+                                {{ Form::open(['route' => ['labels.destroy', $label->id], 'method' => 'delete', 'class' => 'd-inline']) }}
+                                {{ Form::submit(__('labels.delete-btn'), ['class' => 'btn btn-danger']) }}
+                                {{ Form::close() }}
                             </td>
                         @endauth
                     </tr>

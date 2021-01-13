@@ -41,7 +41,7 @@ class LabelController extends Controller
         ]);
         $label->save();
 
-        flash(__('labels.create-success-msg'))->success();
+        flash(__('flash.label.store.success'))->success();
         return redirect()->route('labels.index');
     }
 
@@ -67,14 +67,14 @@ class LabelController extends Controller
         $label->fill(['name' => $request->get('name')]);
         $label->save();
 
-        flash(__('labels.update-success-msg'))->success();
-        return redirect()->route('labels.edit', $label);
+        flash(__('flash.label.update.success'))->success();
+        return redirect()->route('labels.index');
     }
 
     public function destroy(Label $label): RedirectResponse
     {
         $label->delete();
-        flash(__('labels.destroy-success-msg'))->success();
+        flash(__('flash.label.destroy.success'))->success();
         return redirect()->route('labels.index');
     }
 }

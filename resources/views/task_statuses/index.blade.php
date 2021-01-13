@@ -30,9 +30,9 @@
                             <a class="btn btn-primary" href="{{ route('task_statuses.edit', $taskStatus->id) }}">
                                 {{ __('task_statuses.edit-btn') }}
                             </a>
-                            {!! Form::open(['route' => ['task_statuses.destroy', $taskStatus->id], 'method' => 'delete', 'class' => 'd-inline']) !!}
-                            {!! Form::submit(__('task_statuses.delete-btn'), ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
+                            {{ Form::open(['route' => ['task_statuses.destroy', $taskStatus->id], 'method' => 'delete', 'class' => 'd-inline']) }}
+                            {{ Form::submit(__('task_statuses.delete-btn'), ['class' => 'btn btn-danger']) }}
+                            {{ Form::close() }}
                         </td>
                         @endauth
                     </tr>

@@ -36,12 +36,14 @@
                         <td>{{ $task->created_at }}</td>
                         @auth
                         <td>
+                            @can('delete', $task)
                             <a class="btn btn-primary" href="{{ route('tasks.edit', $task) }}">
                                 {{ __('tasks.edit-btn') }}
                             </a>
-                            {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete', 'class' => 'd-inline']) !!}
-                            {!! Form::submit(__('tasks.delete-btn'), ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
+                            {{ Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete', 'class' => 'd-inline']) }}
+                            {{ Form::submit(__('tasks.delete-btn'), ['class' => 'btn btn-danger']) }}
+                            {{ Form::close() }}
+                            @endcan
                         </td>
                         @endauth
                     </tr>

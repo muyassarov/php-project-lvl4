@@ -18,7 +18,6 @@ return [
     'update-title' => 'Update Task',
     'list-title' => 'List of tasks',
     'create-title' => 'Create new task',
-    'show-title' => 'Task:',
     'h-title-actions' => 'Actions',
     'h-title-name' => 'Name',
     'h-title-status' => 'Status',
@@ -31,8 +30,4 @@ return [
     'filter-assignee-placeholder' => 'Assignee',
     'filter-submit-name' => 'Apply',
     'top-nav-label' => 'Tasks',
-    'create-success-msg' => 'Task successfully created',
-    'update-success-msg' => 'Task successfully updated',
-    'destroy-success-msg' => 'Task successfully deleted',
-    'destroy-permission-error-msg' => 'Permission denied, only task creator is able to delete the task'
 ];
