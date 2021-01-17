@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
-@section('title', __('labels.list-title'))
+@section('title', __('views.label.index.title'))
 
 @section('content')
     @auth
         <div class="mb-5">
-            <a class="btn btn-primary" href="{{ route('labels.create') }}">{{ __('labels.add-btn') }}</a>
+            <a class="btn btn-primary" href="{{ route('labels.create') }}">{{ __('views.label.index.add-btn') }}</a>
         </div>
     @endauth
     <section>
-        <h2>{{ __('labels.list-title') }}</h2>
+        <h2>{{ __('views.label.index.title') }}</h2>
         <table class="table">
             <tr>
-                <th>{{ __('labels.h-title-id') }}</th>
-                <th>{{ __('labels.h-title-name') }}</th>
-                <th>{{ __('labels.h-title-created_at') }}</th>
+                <th>{{ __('views.label.index.h-title-id') }}</th>
+                <th>{{ __('views.label.index.h-title-name') }}</th>
+                <th>{{ __('views.label.index.h-title-created_at') }}</th>
                 @auth
-                <th>{{ __('labels.h-title-actions') }}</th>
+                <th>{{ __('views.label.index.h-title-actions') }}</th>
                 @endauth
             </tr>
             @isset($labels)
@@ -28,10 +28,10 @@
                         @auth
                             <td>
                                 <a class="btn btn-primary" href="{{ route('labels.edit', $label) }}">
-                                    {{ __('labels.edit-btn') }}
+                                    {{ __('views.label.index.edit-btn') }}
                                 </a>
                                 {{ Form::open(['route' => ['labels.destroy', $label->id], 'method' => 'delete', 'class' => 'd-inline']) }}
-                                {{ Form::submit(__('labels.delete-btn'), ['class' => 'btn btn-danger']) }}
+                                {{ Form::submit(__('forms.label.destroy.delete-btn'), ['class' => 'btn btn-danger']) }}
                                 {{ Form::close() }}
                             </td>
                         @endauth

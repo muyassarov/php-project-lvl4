@@ -23,7 +23,7 @@ return [
             'success' => 'Label successfully deleted'
         ]
     ],
-    'taskStatus' => [
+    'task-status' => [
         'store' => [
             'success' => 'Task status successfully created'
         ],
