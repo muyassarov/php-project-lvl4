@@ -26,8 +26,8 @@ class TaskTest extends TestCase
     public function testIndexActionAsUser()
     {
         $response = $this->actingAs($this->user)->get(route('tasks.index'));
-        $response->assertSee($this->task->name);
         $response->assertStatus(200);
+        $response->assertSee($this->task->name);
     }
 
     public function testIndexActionAsGuest()
@@ -39,14 +39,14 @@ class TaskTest extends TestCase
 
     public function testCreateActionAsUser()
     {
-        $response = $this->get(route('tasks.create'));
-        $response->assertStatus(403);
+        $response = $this->actingAs($this->user)->get(route('tasks.create'));
+        $response->assertViewIs('tasks.create');
     }
 
     public function testCreateActionAsGuest()
     {
-        $response = $this->actingAs($this->user)->get(route('tasks.create'));
-        $response->assertViewIs('tasks.create');
+        $response = $this->get(route('tasks.create'));
+        $response->assertStatus(403);
     }
 
     public function testStoreActionAsUser()
@@ -123,6 +123,7 @@ class TaskTest extends TestCase
             'name' => 'Updated name'
         ]);
         $response->assertStatus(403);
+        $this->assertDatabaseHas('tasks', $this->task->only(['name', 'id']));
     }
 
     public function testDestroyActionAsCreator()
@@ -130,6 +131,7 @@ class TaskTest extends TestCase
         $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $this->task));
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect();
+        $this->assertDatabaseMissing('tasks', $this->task->only(['name', 'id']));
         $response->assertDontSee($this->task->name);
     }
 
@@ -137,14 +139,15 @@ class TaskTest extends TestCase
     {
         $anyUser = User::factory()->make();
         $anyUser->save();
-
         $response = $this->actingAs($anyUser)->delete(route('tasks.destroy', $this->task));
         $response->assertStatus(403);
+        $this->assertDatabaseHas('tasks', $this->task->only(['name', 'id']));
     }
 
     public function testDestroyActionAsGuest()
     {
         $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertStatus(403);
+        $this->assertDatabaseHas('tasks', $this->task->only(['name', 'id']));
     }
 }

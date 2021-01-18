@@ -36,8 +36,8 @@ class LabelTest extends TestCase
     public function testCreateActionAsUser()
     {
         $response = $this->actingAs($this->user)->get(route('labels.create'));
-        $response->assertViewIs('labels.create');
         $response->assertStatus(200);
+        $response->assertViewIs('labels.create');
     }
 
     public function testCreateActionAsGuest()
@@ -68,8 +68,8 @@ class LabelTest extends TestCase
     public function testEditActionAsUser()
     {
         $response = $this->actingAs($this->user)->get(route('labels.edit', $this->label));
-        $response->assertViewIs('labels.edit');
         $response->assertStatus(200);
+        $response->assertViewIs('labels.edit');
     }
 
     public function testEditActionAsGuest()

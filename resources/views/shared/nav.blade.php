@@ -11,15 +11,15 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ HtmlHelper::activeClass('tasks.index') }}"
-                       href="{{ route('tasks.index') }}">{{ __('tasks.top-nav-label') }}</a>
+                       href="{{ route('tasks.index') }}">{{ __('layout.top-nav-task') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ HtmlHelper::activeClass('task_statuses.index') }}"
-                       href="{{ route('task_statuses.index') }}">{{ __('task_statuses.top-nav-label') }}</a>
+                       href="{{ route('task_statuses.index') }}">{{ __('layout.top-nav-task-status') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ HtmlHelper::activeClass('labels.index') }}"
-                       href="{{ route('labels.index') }}">{{ __('labels.top-nav-label') }}</a>
+                       href="{{ route('labels.index') }}">{{ __('layout.top-nav-label') }}</a>
                 </li>
             </ul>
 

@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
-@section('title', __('task_statuses.update-title'))
+@section('title', __('views.task-status.edit.title'))
 
 @section('content')
-    <h2>{{ __('task_statuses.update-title') }}</h2>
-    {!! Form::model($taskStatus, ['route' => ['task_statuses.update', $taskStatus], 'method' => 'put']) !!}
-    <div class="form-group">
-        {!! Form::label('name', __('task_statuses.label-name')) !!}
-        {!! Form::text('name', $taskStatus->name, ['class' => 'form-control', 'placeholder' => __('task_statuses.task-status-placeholder'), 'required', 'autofocus']) !!}
-    </div>
-    {!! link_to_route('task_statuses.index', __('task_statuses.back-btn'), [], ['class' => 'btn btn-lg btn-secondary']) !!}
-    {!! Form::submit(__('task_statuses.update-btn'), ['class' => 'btn btn-primary btn-lg']) !!}
-    {!! Form::close() !!}
+    <h2>{{ __('views.task-status.edit.title') }}</h2>
+    {{ Form::model($taskStatus, ['route' => ['task_statuses.update', $taskStatus], 'method' => 'put']) }}
+    {{ Form::bsText('name', $taskStatus->name, __('forms.task-status.edit.name-label'), ['placeholder' => __('forms.task-status.edit.name-placeholder'), 'required', 'autofocus']) }}
+    {{ link_to_route('task_statuses.index', __('forms.task-status.edit.back-btn'), [], ['class' => 'btn btn-lg btn-secondary']) }}
+    {{ Form::submit(__('forms.task-status.edit.submit-btn'), ['class' => 'btn btn-primary btn-lg']) }}
+    {{ Form::close() }}
 @endsection

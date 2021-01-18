@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
-@section('title', __('task_statuses.list-title'))
+@section('title', __('views.task-status.index.title'))
 
 @section('content')
     @auth
     <div class="mb-5">
-        <a class="btn btn-primary" href="{{ route('task_statuses.create') }}">{{ __('task_statuses.add-btn') }}</a>
+        <a class="btn btn-primary" href="{{ route('task_statuses.create') }}">{{ __('views.task-status.index.add-btn') }}</a>
     </div>
     @endauth
     <section>
-        <h2>{{ __('task_statuses.list-title') }}</h2>
+        <h2>{{ __('views.task-status.index.title') }}</h2>
         <table class="table">
             <tr>
-                <th>{{ __('task_statuses.h-title-id') }}</th>
-                <th>{{ __('task_statuses.h-title-name') }}</th>
-                <th>{{ __('task_statuses.h-title-created_at') }}</th>
+                <th>{{ __('views.task-status.index.h-title-id') }}</th>
+                <th>{{ __('views.task-status.index.h-title-name') }}</th>
+                <th>{{ __('views.task-status.index.h-title-created_at') }}</th>
                 @auth
-                <th>{{ __('task_statuses.h-title-actions') }}</th>
+                <th>{{ __('views.task-status.index.h-title-actions') }}</th>
                 @endauth
             </tr>
             @isset($taskStatuses)
@@ -28,11 +28,11 @@
                         @auth
                         <td>
                             <a class="btn btn-primary" href="{{ route('task_statuses.edit', $taskStatus->id) }}">
-                                {{ __('task_statuses.edit-btn') }}
+                                {{ __('views.task-status.index.edit-btn') }}
                             </a>
-                            {!! Form::open(['route' => ['task_statuses.destroy', $taskStatus->id], 'method' => 'delete', 'class' => 'd-inline']) !!}
-                            {!! Form::submit(__('task_statuses.delete-btn'), ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
+                            {{ Form::open(['route' => ['task_statuses.destroy', $taskStatus->id], 'method' => 'delete', 'class' => 'd-inline']) }}
+                            {{ Form::submit(__('forms.task-status.destroy.delete-btn'), ['class' => 'btn btn-danger']) }}
+                            {{ Form::close() }}
                         </td>
                         @endauth
                     </tr>
