@@ -10,27 +10,13 @@
     @endauth
     <section>
         @php
-            $filter   = Request::get('filter');
-            $status   = $filter['status_id'] ?? '';
-            $creator  = $filter['created_by_id'] ?? '';
-            $assignee = $filter['assigned_to_id'] ?? '';
+        $filter = Request::get('filter');
         @endphp
-        {{ Form::open(['route' => 'tasks.index', 'method' => 'get', 'class' => 'row mb-4']) }}
-        <div class="col-2">
-            {{ Form::label('filterTaskStatus', '', ['class' => 'sr-only']) }}
-            {{ Form::select('filter[status_id]', $taskStatuses, $status, ['class' => 'form-control', 'placeholder' => __('forms.task.filter.status-placeholder')]) }}
-        </div>
-        <div class="col-2">
-            {{ Form::label('filterTaskCreator', '', ['class' => 'sr-only']) }}
-            {{ Form::select('filter[created_by_id]', $users, $creator, ['class' => 'form-control', 'placeholder' => __('forms.task.filter.creator-placeholder')]) }}
-        </div>
-        <div class="col-2">
-            {{ Form::label('filterTaskAssignee', '', ['class' => 'sr-only']) }}
-            {{ Form::select('filter[assigned_to_id]', $users, $assignee, ['class' => 'form-control', 'placeholder' => __('forms.task.filter.assignee-placeholder')]) }}
-        </div>
-        <div class="col-2">
-            {{ Form::submit(__('forms.task.filter.submit-btn'), ['class' => 'btn btn-outline-primary']) }}
-        </div>
+        {{ Form::open(['route' => 'tasks.index', 'method' => 'get', 'class' => 'form-inline']) }}
+        {{ Form::bsInlineSelect('filter[status_id]', 'filterTaskStatus', $taskStatuses, $filter['status_id'], ['placeholder' => __('forms.task.filter.status-placeholder')]) }}
+        {{ Form::bsInlineSelect('filter[created_by_id]', 'filterTaskCreator', $users, $filter['created_by_id'], ['placeholder' => __('forms.task.filter.creator-placeholder')]) }}
+        {{ Form::bsInlineSelect('filter[assigned_to_id]', 'filterTaskAssignee', $users, $filter['assigned_to_id'], ['placeholder' => __('forms.task.filter.assignee-placeholder')]) }}
+        {{ Form::submit(__('forms.task.filter.submit-btn'), ['class' => 'btn btn-outline-primary mb-2']) }}
         {{ Form::close() }}
         <hr/>
         <h2>{{ __('views.task.index.title') }}</h2>

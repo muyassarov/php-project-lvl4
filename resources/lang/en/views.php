@@ -57,6 +57,11 @@ return [
             'h-title-created_at' => 'Created At',
             'edit-btn' => 'Edit',
         ],
+        'show' => [
+            'title' => 'Task Status',
+            'name' => 'Task status name',
+            'back-btn' => 'Back'
+        ],
         'create' => [
             'title' => 'Create new task status',
         ],
