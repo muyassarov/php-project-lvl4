@@ -11,11 +11,14 @@
     <section>
         @php
         $filter = Request::get('filter');
+        $status = $filter['status_id'] ?? null;
+        $creator = $filter['created_by_id'] ?? null;
+        $assignee = $filter['assigned_to_id'] ?? null;
         @endphp
         {{ Form::open(['route' => 'tasks.index', 'method' => 'get', 'class' => 'form-inline']) }}
-        {{ Form::bsInlineSelect('filter[status_id]', 'filterTaskStatus', $taskStatuses, $filter['status_id'], ['placeholder' => __('forms.task.filter.status-placeholder')]) }}
-        {{ Form::bsInlineSelect('filter[created_by_id]', 'filterTaskCreator', $users, $filter['created_by_id'], ['placeholder' => __('forms.task.filter.creator-placeholder')]) }}
-        {{ Form::bsInlineSelect('filter[assigned_to_id]', 'filterTaskAssignee', $users, $filter['assigned_to_id'], ['placeholder' => __('forms.task.filter.assignee-placeholder')]) }}
+        {{ Form::bsInlineSelect('filter[status_id]', 'filterTaskStatus', $taskStatuses, $status, ['placeholder' => __('forms.task.filter.status-placeholder')]) }}
+        {{ Form::bsInlineSelect('filter[created_by_id]', 'filterTaskCreator', $users, $creator, ['placeholder' => __('forms.task.filter.creator-placeholder')]) }}
+        {{ Form::bsInlineSelect('filter[assigned_to_id]', 'filterTaskAssignee', $users, $assignee, ['placeholder' => __('forms.task.filter.assignee-placeholder')]) }}
         {{ Form::submit(__('forms.task.filter.submit-btn'), ['class' => 'btn btn-outline-primary mb-2']) }}
         {{ Form::close() }}
         <hr/>
