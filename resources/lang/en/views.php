@@ -4,18 +4,18 @@ return [
     'task' => [
         'index' => [
             'title' => 'List of tasks',
-            'add-btn' => 'Add Task',
-            'h-title-actions' => 'Actions',
-            'h-title-name' => 'Name',
-            'h-title-status' => 'Status',
-            'h-title-creator' => 'Creator',
-            'h-title-assignee' => 'Assignee',
-            'h-title-id' => 'ID',
-            'h-title-created_at' => 'Created At',
-            'edit-btn' => 'Edit',
+            'add' => 'Add Task',
+            'actions' => 'Actions',
+            'name' => 'Name',
+            'status' => 'Status',
+            'creator' => 'Creator',
+            'assignee' => 'Assignee',
+            'id' => 'ID',
+            'created-at' => 'Created At',
+            'edit' => 'Edit',
         ],
         'show' => [
-            'btn-back' => 'Back',
+            'back' => 'Back',
             'title' => 'Task:',
             'status' => 'Status',
             'description' => 'Description',
@@ -33,12 +33,12 @@ return [
     'label' => [
         'index' => [
             'title' => 'List of labels',
-            'add-btn' => 'Add Label',
-            'edit-btn' => 'Edit',
-            'h-title-actions' => 'Actions',
-            'h-title-name' => 'Name',
-            'h-title-id' => 'ID',
-            'h-title-created_at' => 'Created At',
+            'add' => 'Add Label',
+            'edit' => 'Edit',
+            'actions' => 'Actions',
+            'name' => 'Name',
+            'id' => 'ID',
+            'created-at' => 'Created At',
         ],
         'create' => [
             'title' => 'Create new label'
@@ -50,17 +50,17 @@ return [
     'task-status' => [
         'index' => [
             'title' => 'List of task statuses',
-            'add-btn' => 'Add Status',
-            'h-title-actions' => 'Actions',
-            'h-title-name' => 'Name',
-            'h-title-id' => 'ID',
-            'h-title-created_at' => 'Created At',
-            'edit-btn' => 'Edit',
+            'add' => 'Add Status',
+            'actions' => 'Actions',
+            'name' => 'Name',
+            'id' => 'ID',
+            'created-at' => 'Created At',
+            'edit' => 'Edit',
         ],
         'show' => [
             'title' => 'Task Status',
             'name' => 'Task status name',
-            'back-btn' => 'Back'
+            'back' => 'Back'
         ],
         'create' => [
             'title' => 'Create new task status',

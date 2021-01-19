@@ -10,7 +10,7 @@
     {{ Form::bsSelect('status_id', $taskStatuses, 'New', __('forms.task.create.status-label'), ['required']) }}
     {{ Form::bsSelect('assignee_to_id', $users, null, __('forms.task.create.assigned-to-label'), ['placeholder' => __('forms.task.create.assigned-to-placeholder')]) }}
     {{ Form::bsSelect('labels[]', $labels, null, __('forms.task.create.labels-label'), ['multiple']) }}
-    {{ link_to_route('tasks.index', __('forms.task.create.back-btn'), [], ['class' => 'btn btn-lg btn-secondary']) }}
-    {{ Form::submit(__('forms.task.create.submit-btn'), ['class' => 'btn btn-primary btn-lg']) }}
+    {{ link_to_route('tasks.index', __('forms.task.create.back'), [], ['class' => 'btn btn-lg btn-secondary']) }}
+    {{ Form::submit(__('forms.task.create.submit'), ['class' => 'btn btn-primary btn-lg']) }}
     {{ Form::close() }}
 @endsection

@@ -7,7 +7,7 @@
     <div class="jumbotron">
         <p><strong>{{ __('views.task-status.show.name') }}</strong>: {{ $taskStatus->name }}</p>
         <a class="btn btn-lg btn-secondary" href="{{ route('task_statuses.index') }}">
-            {{ __('views.task-status.show.back-btn') }}
+            {{ __('views.task-status.show.back') }}
         </a>
     </div>
 @endsection
