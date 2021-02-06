@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use Illuminate\Auth\Access\Response;
 use App\Models\{TaskStatus, User};
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -62,8 +63,10 @@ class TaskStatusPolicy
      * @param  TaskStatus  $taskStatus
      * @return mixed
      */
-    public function delete(User $user, TaskStatus $taskStatus): bool
+    public function delete(User $user, TaskStatus $taskStatus)
     {
-        return (bool)$user;
+        return (bool)$user && $taskStatus->tasks->count() == 0
+            ? Response::allow()
+            : Response::deny(__('flash.task-status.destroy.error'));
     }
 }

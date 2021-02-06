@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\{RedirectResponse, Request};
 use Illuminate\Validation\Rule;
 
@@ -66,8 +67,14 @@ class TaskStatusController extends Controller
 
     public function destroy(TaskStatus $taskStatus): RedirectResponse
     {
-        $taskStatus->delete();
-        flash(__('flash.task-status.destroy.success'))->success();
+        $response = Gate::inspect('destroy-task-status', $taskStatus);
+
+        if ($response->allowed()) {
+            $taskStatus->delete();
+            flash(__('flash.task-status.destroy.success'))->success();
+        } else {
+            flash($response->message())->error();
+        }
         return redirect()->route('task_statuses.index');
     }
 }

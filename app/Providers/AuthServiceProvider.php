@@ -2,7 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\TaskStatus;
+use App\Models\User;
+use App\Policies\TaskStatusPolicy;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -11,7 +16,9 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [];
+    protected $policies = [
+        TaskStatus::class => TaskStatusPolicy::class
+    ];
 
     /**
      * Register any authentication / authorization services.
@@ -22,5 +29,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         //
+
+        Gate::define('destroy-task-status', function (User $user, TaskStatus $taskStatus) {
+            return (bool)$user && $taskStatus->tasks->count() == 0
+                ? Response::allow()
+                : Response::deny(__('flash.task-status.destroy.error'));
+        });
     }
 }

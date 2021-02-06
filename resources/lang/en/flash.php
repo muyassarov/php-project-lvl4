@@ -31,7 +31,8 @@ return [
             'success' => 'Task status successfully updated'
         ],
         'destroy' => [
-            'success' => 'Task status successfully deleted'
+            'success' => 'Task status successfully deleted',
+            'error' => 'You cannot delete this task status'
         ]
     ]
 ];
