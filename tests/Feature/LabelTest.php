@@ -102,11 +102,13 @@ class LabelTest extends TestCase
         $response = $this->actingAs($this->user)->delete(route('labels.destroy', $this->label));
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect();
+        $this->assertDatabaseMissing('labels', $this->label->only(['name', 'id']));
     }
 
     public function testDestroyAsGuest()
     {
         $response = $this->delete(route('labels.destroy', $this->label));
         $response->assertStatus(403);
+        $this->assertDatabaseHas('labels', $this->label->only(['name', 'id']));
     }
 }

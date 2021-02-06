@@ -96,7 +96,6 @@ class TaskController extends Controller
             flash($validator->errors()->first())->error();
             return redirect()->route('tasks.edit', $task)->withInput();
         }
-
         $labels = $request->get('labels');
         $task->fill([
             'name'           => $request->get('name'),
