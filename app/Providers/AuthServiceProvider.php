@@ -16,9 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        TaskStatus::class => TaskStatusPolicy::class
-    ];
+    protected $policies = [];
 
     /**
      * Register any authentication / authorization services.
@@ -29,11 +27,5 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         //
-
-        Gate::define('destroy-task-status', function (User $user, TaskStatus $taskStatus) {
-            return (bool)$user && $taskStatus->tasks->count() == 0
-                ? Response::allow()
-                : Response::deny(__('flash.task-status.destroy.error'));
-        });
     }
 }

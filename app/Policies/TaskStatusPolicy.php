@@ -65,8 +65,6 @@ class TaskStatusPolicy
      */
     public function delete(User $user, TaskStatus $taskStatus)
     {
-        return (bool)$user && $taskStatus->tasks->count() == 0
-            ? Response::allow()
-            : Response::deny(__('flash.task-status.destroy.error'));
+        return (bool)$user;
     }
 }
