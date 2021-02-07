@@ -2,12 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\TaskStatus;
-use App\Models\User;
-use App\Policies\TaskStatusPolicy;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
