@@ -23,6 +23,7 @@ return [
             'assigned-to-label' => 'Assigned To',
             'assigned-to-placeholder' => 'Select assignee',
             'labels-label' => 'Labels',
+            'labels-placeholder' => '',
             'back' => 'Back',
             'submit' => 'Update Task',
         ],

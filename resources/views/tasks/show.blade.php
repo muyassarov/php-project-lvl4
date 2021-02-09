@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mb-2">
-        <a href="{{ route('tasks.index') }}" class="btn btn-outline-primary">{{ __('views.task.show.btn-back') }}</a>
+        <a href="{{ route('tasks.index') }}" class="btn btn-outline-primary">{{ __('views.task.show.back') }}</a>
     </div>
     <div class="jumbotron">
         <h1>{{ __('views.task.show.title') }} {{ $task->name }} <a href="{{ route('tasks.edit', $task) }}">⚙</a> </h1>

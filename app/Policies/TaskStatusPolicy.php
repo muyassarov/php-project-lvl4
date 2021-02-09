@@ -62,7 +62,7 @@ class TaskStatusPolicy
      * @param  TaskStatus  $taskStatus
      * @return mixed
      */
-    public function delete(User $user, TaskStatus $taskStatus): bool
+    public function delete(User $user, TaskStatus $taskStatus)
     {
         return (bool)$user;
     }

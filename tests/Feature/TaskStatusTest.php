@@ -126,12 +126,13 @@ class TaskStatusTest extends TestCase
             ->delete(route('task_statuses.destroy', $this->taskStatus));
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect();
-        $response->assertDontSee($this->taskStatus->name);
+        $this->assertDatabaseMissing('task_statuses', $this->taskStatus->only(['name', 'id']));
     }
 
     public function testDestroyActionAsGuest()
     {
         $response = $this->delete(route('task_statuses.destroy', $this->taskStatus));
         $response->assertStatus(403);
+        $this->assertDatabaseHas('task_statuses', $this->taskStatus->only(['name', 'id']));
     }
 }

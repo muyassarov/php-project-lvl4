@@ -20,7 +20,8 @@ return [
             'success' => 'Label successfully updated'
         ],
         'destroy' => [
-            'success' => 'Label successfully deleted'
+            'success' => 'Label successfully deleted',
+            'error'   => 'You cannot delete this label'
         ]
     ],
     'task-status' => [
@@ -31,7 +32,8 @@ return [
             'success' => 'Task status successfully updated'
         ],
         'destroy' => [
-            'success' => 'Task status successfully deleted'
+            'success' => 'Task status successfully deleted',
+            'error' => 'You cannot delete this task status'
         ]
     ]
 ];
