@@ -96,7 +96,9 @@ class TaskController extends Controller
             flash($validator->errors()->first())->error();
             return redirect()->route('tasks.edit', $task)->withInput();
         }
-        $labels = $request->get('labels');
+        $labels = collect($request->get('labels'))->filter(function ($value) {
+            return (bool)$value;
+        });
         $task->fill([
             'name'           => $request->get('name'),
             'description'    => $request->get('description'),
@@ -104,9 +106,8 @@ class TaskController extends Controller
             'assigned_to_id' => $request->get('assigned_to_id'),
         ]);
         $task->save();
-
-        if ($labels) {
-            $task->labels()->sync($labels);
+        if ($labels->count()) {
+            $task->labels()->sync($labels->toArray());
         } else {
             $task->labels()->detach();
         }
