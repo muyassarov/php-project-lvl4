@@ -78,9 +78,9 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $taskStatuses  = TaskStatus::all()->pluck('name', 'id');
-        $users         = User::all()->pluck('name', 'id');
-        $labels        = Label::all()->pluck('name', 'id');
+        $taskStatuses = TaskStatus::all()->pluck('name', 'id');
+        $users        = User::all()->pluck('name', 'id');
+        $labels       = Label::all()->pluck('name', 'id');
 
         return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels'));
     }
@@ -103,8 +103,13 @@ class TaskController extends Controller
             'status_id'      => $request->get('status_id'),
             'assigned_to_id' => $request->get('assigned_to_id'),
         ]);
-        $task->labels()->sync($labels);
         $task->save();
+
+        if ($labels) {
+            $task->labels()->sync($labels);
+        } else {
+            $task->labels()->detach();
+        }
 
         flash(__('flash.task.update.success'))->success();
         return redirect()->route('tasks.index');

@@ -48,10 +48,10 @@
                         <td>{{ $task->created_at }}</td>
                         @auth
                         <td>
-                            @can('delete', $task)
                             <a class="btn btn-primary" href="{{ route('tasks.edit', $task) }}">
                                 {{ __('views.task.index.edit') }}
                             </a>
+                            @can('delete', $task)
                             {{ Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete', 'class' => 'd-inline']) }}
                             {{ Form::submit(__('forms.task.destroy.delete'), ['class' => 'btn btn-danger']) }}
                             {{ Form::close() }}
